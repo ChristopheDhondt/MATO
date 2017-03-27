@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  mato:
+    image: mato
+    build:
+      context: ./MATO
+      dockerfile: Dockerfile
