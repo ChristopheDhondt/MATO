@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MATO.Models;
 
 namespace MATO
 {
@@ -28,6 +29,9 @@ namespace MATO
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
+            services.AddDbContext<MatoContext>();
+
             services.AddMvc();
         }
 

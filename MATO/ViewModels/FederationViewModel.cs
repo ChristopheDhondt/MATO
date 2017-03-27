@@ -4,22 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MATO.Models
+namespace MATO.ViewModels
 {
-    public class Federation
+    public class FederationViewModel
     {
-        public int Id { get; set; }
-
         public string NameFr { get; set; }
 
         public string NameNl { get; set; }
 
         public string NameDe { get; set; }
 
-        public Address OfficialAdress { get; set; }
+        public AddressViewModel OfficialAdress { get; set; }
 
-        public Address PostalAdress { get; set; }
+        public AddressViewModel PostalAdress { get; set; }
 
-        public ICollection<Club> Clubs { get; set; }
+        public ICollection<ClubViewModel> Clubs { get; set; }
     }
 }
