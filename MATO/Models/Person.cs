@@ -21,5 +21,7 @@ namespace MATO.Models
         public string EmailAdress { get; set; }
 
         public string LastConnection { get; set; }
+
+        public ICollection<ClubMember> ClubMembers { get; set; }
     }
 }

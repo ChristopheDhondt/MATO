@@ -8,7 +8,10 @@ namespace MATO.Models
 {
     public class TeamCoach
     {
+        public int TeamId { get; set; }
         public Team Team { get; set; }
+
+        public int CoachId { get; set; }
         public ClubMember Coach { get; set; }
     }
 }
