@@ -8,16 +8,16 @@ namespace MATO.Models
 {
     public class MatoRepository:IMatoRepository
     {
-        public MatoContext __context;
+        public MatoContext _context;
 
         public MatoRepository(MatoContext context)
         {
-            __context = context;
+            _context = context;
         }
 
         public void AddFederation(Federation newFederation)
         {
-            __context.Add(newFederation);
+            _context.Add(newFederation);
         }
 
         public Federation FindFederation(int id)
@@ -27,7 +27,12 @@ namespace MATO.Models
 
         public IEnumerable<Federation> GetAllFederations()
         {
-            return __context.Federations.ToList();
+            return _context.Federations.ToList();
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync()) > 0;
         }
     }
 }

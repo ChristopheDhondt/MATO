@@ -1,5 +1,7 @@
 ﻿using MATO.Models;
+using MATO.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,24 @@ namespace MATO.Controllers
             
         }
 
+        [HttpGet]
         public IActionResult Add() {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(FederationViewModel federation)
+        {
+            if (ModelState.IsValid) {
+                try
+                {
+                    __repository.AddFederation(federation);
+                    await __repository.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException) {
+                }
+                return RedirectToAction("Index");
+            }
             return View();
         }
     }

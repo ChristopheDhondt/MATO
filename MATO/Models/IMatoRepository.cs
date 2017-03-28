@@ -13,5 +13,7 @@ namespace MATO.Models
         Federation FindFederation(int id);
 
         void AddFederation(Federation federation);
+
+        Task<bool> SaveChangesAsync();
     }
 }
