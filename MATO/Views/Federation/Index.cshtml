@@ -14,14 +14,16 @@
                 </tr>
             </thead>
             <tbody>
+                @{int i = 0;}
                 @foreach (var federation in Model)
                 {
+                    i++;
                     <tr>
-                        <th scope="row">{{ loop.index }}</th>
-                        <td>@federation.getName("fr")</td>
+                        <th scope="row">@i</th>
+                        <td>@federation.NameFr</td>
                         <td>
-                            <a class="btn btn-primary" role="button" asp-controller="Federation" asp-action="Edit" asp-all-route-data="@federation.id">Edit</a>
-                            <a class="btn btn-danger" role="button" asp-controller="Federation" asp-action="Delete" asp-all-route-data="@federation.id">Delete</a>
+                            <a class="btn btn-primary" role="button" asp-controller="Federation" asp-action="Edit" asp-route-id="@federation.Id">Edit</a>
+                            <a class="btn btn-danger" role="button" asp-controller="Federation" asp-action="Delete" asp-route-id="@federation.Id">Delete</a>
                         </td>
                     </tr>
                 }                

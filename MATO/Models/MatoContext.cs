@@ -12,7 +12,7 @@ namespace MATO.Models
     {
         private IConfigurationRoot _appSettings;
 
-        public MatoContext(IConfigurationRoot appSettings, DbContextOptions options) : base(options)
+        public MatoContext(IConfigurationRoot appSettings, DbContextOptions<MatoContext> options) : base(options)
         {
             _appSettings = appSettings;
         }
@@ -28,7 +28,6 @@ namespace MATO.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-
             optionsBuilder.UseSqlServer(_appSettings["ConnectionStrings:MatoContextConnection"]);
         }
 

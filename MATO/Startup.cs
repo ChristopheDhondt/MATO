@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MATO.Models;
+using MATO.ViewModels;
 
 namespace MATO
 {
@@ -41,7 +43,14 @@ namespace MATO
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {        
+        {
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<FederationViewModel, Federation>().ReverseMap();
+                config.CreateMap<AddressViewModel, Address>().ReverseMap();
+                config.CreateMap<ClubViewModel, Club>().ReverseMap();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

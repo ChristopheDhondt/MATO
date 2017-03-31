@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MATO.ViewModels;
 
 namespace MATO.Models
 {
@@ -10,10 +11,12 @@ namespace MATO.Models
     {
         IEnumerable<Federation> GetAllFederations();
 
-        Federation FindFederation(int id);
+        Federation FindFederation(int? id);
 
-        void AddFederation(Federation federation);
+        Task<bool> AddFederation(Federation federation);
 
         Task<bool> SaveChangesAsync();
+
+        Task<bool> DeleteFederation(int? id);
     }
 }

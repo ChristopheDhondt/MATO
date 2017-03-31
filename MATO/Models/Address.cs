@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace MATO.Models
     {
         public int Id { get; set; }
 
+        [StringLength(250, MinimumLength = 5)]
         public string Street { get; set; }
 
         public string PostNumber { get; set; }
