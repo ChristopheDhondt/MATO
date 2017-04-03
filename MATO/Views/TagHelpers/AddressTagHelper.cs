@@ -1,4 +1,4 @@
-﻿using MATO.ViewModels;
+﻿using MATO.Models;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ namespace AuthoringTagHelpers.TagHelpers
 {
     public class AddressTagHelper : TagHelper
     {
-        public AddressViewModel address { get; set; }
+        public Address address { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MATO.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
 namespace MATO.Models
 {
-    public class FederationRepository: IMatoRepository
+    public class FederationRepository: IFederationRepository
     {
         public MatoContext _context;
 
@@ -18,14 +17,14 @@ namespace MATO.Models
             _context = context;            
         }
 
-        public Federation FindFederation(int? id)
+        public async Task<Federation> FindFederation(int? id)
         {
-            return _context.Federations.Include(f => f.OfficialAdress).Include(f => f.PostalAdress).Single(f => f.Id == id);            
+            return await _context.Federations.Include(f => f.OfficialAdress).Include(f => f.PostalAdress).SingleAsync(f => f.Id == id);            
         }
 
-        public IEnumerable<Federation> GetAllFederations()
+        public async Task<IEnumerable<Federation>> GetAllFederations()
         {
-            return _context.Federations.ToList();
+            return await _context.Federations.ToListAsync();
         }
 
         public async Task<bool> SaveChangesAsync()
@@ -42,9 +41,9 @@ namespace MATO.Models
         public Task<bool> DeleteFederation(int? id)
         {
             var federation = this.FindFederation(id);
-            _context.Remove(federation.PostalAdress);
-            _context.Remove(federation.OfficialAdress);
-            _context.Remove(federation);
+            _context.Remove(federation.Result.PostalAdress);
+            _context.Remove(federation.Result.OfficialAdress);
+            _context.Remove(federation.Result);
             return this.SaveChangesAsync();
         }
     }

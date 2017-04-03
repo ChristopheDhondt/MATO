@@ -8,8 +8,8 @@ using MATO.Models;
 namespace MATO.Migrations
 {
     [DbContext(typeof(MatoContext))]
-    [Migration("20170328132731_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20170403133324_MATO")]
+    partial class MATO
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,8 @@ namespace MATO.Migrations
 
                     b.Property<string>("PostNumber");
 
-                    b.Property<string>("Street");
+                    b.Property<string>("Street")
+                        .HasMaxLength(250);
 
                     b.HasKey("Id");
 
@@ -85,11 +86,9 @@ namespace MATO.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("NameDe");
-
-                    b.Property<string>("NameFr");
-
-                    b.Property<string>("NameNl");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<int?>("OfficialAdressId");
 

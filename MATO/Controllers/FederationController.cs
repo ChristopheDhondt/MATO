@@ -1,5 +1,4 @@
 ﻿using MATO.Models;
-using MATO.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Extensions.Localization;
 
 namespace MATO.Controllers
 {    
     public class FederationController : Controller
     {
-        private IMatoRepository _repository;
+        private IFederationRepository _repository;        
 
-        public FederationController(IMatoRepository repository) {
+        public FederationController(IFederationRepository repository) {            
             _repository = repository;
         }
 
         public IActionResult Index() {            
-            var data = _repository.GetAllFederations();
+            var data = _repository.GetAllFederations().Result;
             ViewBag.title = "Federation List";
             return View(data);            
         }
@@ -46,19 +46,17 @@ namespace MATO.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            ViewBag.title = "Edit Federation";
+        public async Task<IActionResult> Edit(int? id)
+        {            
             if (id == null)
             {
                 return NotFound();
             }
-            var federation = _repository.FindFederation(id);       
-
+            var federation = await _repository.FindFederation(id);
+            ViewBag.title = "Edit Federation";
             return View("Form", federation);
         }
 
-        //[HttpPost,ActionName("Edit")]
         [HttpPost]
         public async Task<IActionResult> Edit(Federation editedFederation)
         {
@@ -66,7 +64,7 @@ namespace MATO.Controllers
             {
                 try
                 {
-                    await TryUpdateModelAsync<Federation>(_repository.FindFederation(editedFederation.Id));
+                    await TryUpdateModelAsync<Federation>(await _repository.FindFederation(editedFederation.Id));
                     await _repository.SaveChangesAsync();              
                 }
                 catch (DbUpdateConcurrencyException)
@@ -78,7 +76,20 @@ namespace MATO.Controllers
             return View("Form");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var federation = await _repository.FindFederation(id);
+            ViewBag.title = "Delete Federation";
+            return View("Delete", federation);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int? id)
         {
             if (id == null)
             {

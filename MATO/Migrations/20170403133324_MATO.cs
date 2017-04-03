@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MATO.Migrations
 {
-    public partial class InitialDatabase : Migration
+    public partial class MATO : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace MATO.Migrations
                     PostBox = table.Column<string>(nullable: true),
                     PostCode = table.Column<string>(nullable: true),
                     PostNumber = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true)
+                    Street = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,9 +33,7 @@ namespace MATO.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NameDe = table.Column<string>(nullable: true),
-                    NameFr = table.Column<string>(nullable: true),
-                    NameNl = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     OfficialAdressId = table.Column<int>(nullable: true),
                     PostalAdressId = table.Column<int>(nullable: true)
                 },

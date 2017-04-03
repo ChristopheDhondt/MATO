@@ -1,0 +1,15 @@
+﻿@model MATO.Models.Federation
+
+<div class="panel panel-danger">
+    <div class="panel-heading">@ViewBag.Title</div>   
+    <div class="panel-body">
+        <h3>Are you sure you want to delete this ?</h3>
+        <form method="post">
+            @Html.Partial("FederationViewPartial", Model)             
+            <div class="form-group">
+                <a asp-controller="Federation" asp-action="Index" class="btn btn-default">Cancel</a>
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        </form>
+   </div>
+</div>

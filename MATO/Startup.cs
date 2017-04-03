@@ -9,13 +9,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MATO.Models;
-using MATO.ViewModels;
+using Microsoft.Extensions.Localization;
+using MATO.Controllers;
 
 namespace MATO
 {
     public class Startup
     {
-        private IConfigurationRoot _appsettings;
+        private IConfigurationRoot _appsettings;        
 
         public Startup(IHostingEnvironment env)
         {
@@ -36,21 +37,16 @@ namespace MATO
 
             services.AddDbContext<MatoContext>();
 
-            services.AddScoped<IMatoRepository, FederationRepository>();
+            services.AddScoped<IFederationRepository, FederationRepository>();
+
+            services.AddTransient<MatoContextSeedData>();
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            Mapper.Initialize(config =>
-            {
-                config.CreateMap<FederationViewModel, Federation>().ReverseMap();
-                config.CreateMap<AddressViewModel, Address>().ReverseMap();
-                config.CreateMap<ClubViewModel, Club>().ReverseMap();
-            });
-
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MatoContextSeedData seeder, ILoggerFactory loggerFactory)
+        {            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,6 +68,8 @@ namespace MATO
                 defaults: new { controller = "Home", action = "Index" }
                 );
             });
+
+            seeder.EnsureSeedData().Wait();
         }
     }
 }
