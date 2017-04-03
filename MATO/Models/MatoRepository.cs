@@ -9,11 +9,11 @@ using AutoMapper;
 
 namespace MATO.Models
 {
-    public class MatoRepository: IMatoRepository
+    public class FederationRepository: IMatoRepository
     {
         public MatoContext _context;
 
-        public MatoRepository(MatoContext context)
+        public FederationRepository(MatoContext context)
         {
             _context = context;            
         }
@@ -43,11 +43,8 @@ namespace MATO.Models
         {
             var federation = this.FindFederation(id);
             _context.Remove(federation.PostalAdress);
-
             _context.Remove(federation.OfficialAdress);
-
             _context.Remove(federation);
-
             return this.SaveChangesAsync();
         }
     }

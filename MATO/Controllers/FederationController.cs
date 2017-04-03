@@ -21,11 +21,13 @@ namespace MATO.Controllers
 
         public IActionResult Index() {            
             var data = _repository.GetAllFederations();
+            ViewBag.title = "Federation List";
             return View(data);            
         }
 
         [HttpGet]
         public IActionResult Add() {
+            ViewBag.title = "Add Federation";
             return View("Form");
         }
 
@@ -39,12 +41,14 @@ namespace MATO.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.title = "Add Federation";
             return View("Form", newFederation);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            ViewBag.title = "Edit Federation";
             if (id == null)
             {
                 return NotFound();
@@ -70,6 +74,7 @@ namespace MATO.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.title = "Edit Federation";
             return View("Form");
         }
 

@@ -36,7 +36,7 @@ namespace MATO
 
             services.AddDbContext<MatoContext>();
 
-            services.AddScoped<IMatoRepository, MatoRepository>();
+            services.AddScoped<IMatoRepository, FederationRepository>();
 
             services.AddMvc();
         }
