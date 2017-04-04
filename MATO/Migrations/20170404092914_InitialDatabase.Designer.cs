@@ -8,8 +8,8 @@ using MATO.Models;
 namespace MATO.Migrations
 {
     [DbContext(typeof(MatoContext))]
-    [Migration("20170403133324_MATO")]
-    partial class MATO
+    [Migration("20170404092914_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

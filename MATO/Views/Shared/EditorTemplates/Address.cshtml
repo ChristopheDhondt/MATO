@@ -1,6 +1,6 @@
 ﻿@model MATO.Models.Address
  
-<div class="col-lg-4 col-md-6 col-sm-12">
+<div class="col-lg-6 col-md-6 col-sm-12">
     <div class="panel panel-default">
         <div class="panel-body">
             @if (ViewBag.Message != null)
@@ -8,7 +8,7 @@
                 <div>@ViewBag.Message</div>
             }
             <div asp-validation-summary="ModelOnly"></div>
-            <h4>@ViewBag.Title</h4>
+            <h4>@ViewBag.AddressTitle</h4>
             <div class="form-group">
                 <label asp-for="Street"></label>
                 <input asp-for="Street" class="form-control" />

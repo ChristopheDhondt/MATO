@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MATO.Migrations
 {
-    public partial class MATO : Migration
+    public partial class InitialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -20,7 +20,7 @@ namespace MATO.Models
             {
                 var persons = this.addPersons();
 
-                var federations  = this.addFederations();
+                var federations = this.addFederations();
 
                 var clubs = this.addClubs(federations);
 
@@ -34,6 +34,7 @@ namespace MATO.Models
 
                 await _context.SaveChangesAsync();
             }
+            return;
         }
 
         private List<Person> addPersons()

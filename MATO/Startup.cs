@@ -38,6 +38,7 @@ namespace MATO
             services.AddDbContext<MatoContext>();
 
             services.AddScoped<IFederationRepository, FederationRepository>();
+            services.AddScoped<IClubRepository, ClubRepository>();
 
             services.AddTransient<MatoContextSeedData>();
 
@@ -69,7 +70,7 @@ namespace MATO
                 );
             });
 
-            seeder.EnsureSeedData().Wait();
+            //seeder.EnsureSeedData().Wait();
         }
     }
 }

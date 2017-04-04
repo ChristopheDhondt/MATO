@@ -19,6 +19,8 @@ namespace MATO.Models
 
         public DbSet<Federation> Federations { get; set; }
 
+        public DbSet<Address> Address { get; set; }
+
         public DbSet<Club> Clubs { get; set; }
         
         public DbSet<Person> Persons { get; set; }
