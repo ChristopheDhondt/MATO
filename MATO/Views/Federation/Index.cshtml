@@ -6,7 +6,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Name</th>                    
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -17,7 +17,7 @@
                     i++;
                     <tr>
                         <th scope="row">@i</th>
-                        <td>@federation.Name</td>
+                        <td>@federation.Name</td>                       
                         <td>
                             <a class="btn btn-primary" role="button" asp-controller="Federation" asp-action="Edit" asp-route-id="@federation.Id">Edit</a>
                             <a class="btn btn-danger" role="button" asp-controller="Federation" asp-action="Delete" asp-route-id="@federation.Id">Delete</a>

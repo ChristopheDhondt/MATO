@@ -19,12 +19,19 @@ namespace MATO.Models
 
         public async Task<Federation> FindFederation(int? id)
         {
-            var query = from f in _context.Federations
+            var queryClubs = from c in _context.Clubs
+                             where c.Federation.Id == id
+                             select c;
+           
+
+
+            var queryFederation = from f in _context.Federations                   
                         join o in _context.Address on f.OfficialAdress equals o
-                        join p in _context.Address on f.PostalAdress equals p
-                        where f.Id == id
-                        select f;
-            return await query.SingleAsync();     
+                        join p in _context.Address on f.PostalAdress equals p                          
+                        where f.Id == id                       
+                        select new Federation {Id = f.Id,  Name = f.Name, Clubs = queryClubs.ToList(), OfficialAdress = f.OfficialAdress, PostalAdress = f.PostalAdress };
+
+            return await queryFederation.SingleAsync();     
                         
             //return await _context.Federations.Include(f => f.OfficialAdress).Include(f => f.PostalAdress).SingleAsync(f => f.Id == id);            
         }

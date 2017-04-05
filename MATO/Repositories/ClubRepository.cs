@@ -24,6 +24,13 @@ namespace MATO.Models
 
         public async Task<Club> FindClub(int? id)
         {
+            //var query = from c in _context.Federations
+            //            join o in _context.Address on c.OfficialAdress equals o
+            //            join p in _context.Address on c.PostalAdress equals p
+
+            //            where c.Id == id
+            //            select new Federation { Id = f.Id, Name = f.Name, Clubs = f.Clubs, OfficialAdress = f.OfficialAdress, PostalAdress = f.PostalAdress };
+
             return await _context.Clubs.Include(c => c.OfficialAdress)
                                        .Include(c => c.PostalAdress)
                                        .Include(c => c.ClubMembers)

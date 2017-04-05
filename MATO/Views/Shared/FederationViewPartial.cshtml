@@ -1,6 +1,17 @@
 ﻿@model MATO.Models.Federation
 
-@Model.NameFr
+@Model.Name
 
 @Model.PostalAdress.Street , @Model.PostalAdress.PostNumber @Model.PostalAdress.PostBox
 @Model.PostalAdress.PostCode @Model.PostalAdress.City @Model.PostalAdress.Country
+
+    @{
+        var clubs = "";
+        foreach (var club in Model.Clubs)
+        {
+            clubs += club.Name;
+        }
+    }
+    @clubs
+
+
