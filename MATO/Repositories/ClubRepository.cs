@@ -34,7 +34,8 @@ namespace MATO.Models
             return await _context.Clubs.Include(c => c.OfficialAdress)
                                        .Include(c => c.PostalAdress)
                                        .Include(c => c.ClubMembers)
-                                       .Include(c => c.Teams)                                       
+                                       .Include(c => c.Teams)   
+                                       .Include(c => c.Federation)
                                        .SingleAsync(c => c.Id == id);
         }
 

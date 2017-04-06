@@ -13,10 +13,12 @@ namespace MATO.Controllers
 {    
     public class ClubController : Controller
     {
-        private IClubRepository _repository;        
+        private IClubRepository _repository;
+        private IFederationRepository _repositoryFederation;
 
-        public ClubController(IClubRepository repository) {            
+        public ClubController(IClubRepository repository, IFederationRepository repositoryFederation) {            
             _repository = repository;
+            _repositoryFederation = repositoryFederation;
         }
 
         public IActionResult Index() {            
@@ -26,8 +28,9 @@ namespace MATO.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add() {
+        public async Task<IActionResult> Add() {
             ViewBag.title = "Add Club";
+            ViewBag.federations = await _repositoryFederation.GetSelectListItems();
             return View("Form");
         }
 
@@ -42,6 +45,7 @@ namespace MATO.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.title = "Add Club";
+            ViewBag.federations = await _repositoryFederation.GetSelectListItems();
             return View("Form", newClub);
         }
 
@@ -54,6 +58,7 @@ namespace MATO.Controllers
             }
             var club = await _repository.FindClub(id);
             ViewBag.title = "Edit Club";
+            ViewBag.federations = await _repositoryFederation.GetSelectListItems();
             return View("Form", club);
         }
 
@@ -73,6 +78,7 @@ namespace MATO.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.title = "Edit Federation";
+            ViewBag.federations = await _repositoryFederation.GetSelectListItems();
             return View("Form");
         }
 

@@ -24,7 +24,12 @@
                                 <label asp-for="Name"></label>
                                 <input asp-for="Name" class="form-control" />
                                 <span asp-validation-for="Name" class="text-muted"></span>
-                            </div>                            
+                            </div>    
+                            <div class="form-group">
+                                <label asp-for="Federation"></label>
+                                <select asp-for="Federation" asp-items="ViewBag.federations" class="form-control" ></select>
+                                <span asp-validation-for="Federation" class="text-muted"></span>
+                            </div>    
                         </div>
                     </div>
                 </div>                    
@@ -36,7 +41,7 @@
                 @Html.EditorFor(Model => Model.PostalAdress)
             </div>
             <div class="form-group">
-                <a asp-controller="Federation" asp-action="Index" class="btn btn-default">Cancel</a>
+                <a asp-controller="Club" asp-action="Index" class="btn btn-default">Cancel</a>
                 <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </form>

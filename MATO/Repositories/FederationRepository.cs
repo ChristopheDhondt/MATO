@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MATO.Models
 {
@@ -39,6 +40,16 @@ namespace MATO.Models
         public async Task<IEnumerable<Federation>> GetAllFederations()
         {
             return await _context.Federations.ToListAsync();
+        }
+
+        public async Task<List<SelectListItem>> GetSelectListItems()
+        {
+            var items = new List<SelectListItem>();
+            foreach (var federation in await _context.Federations.ToListAsync())
+            {
+                items.Add(new SelectListItem { Value = federation.Id.ToString() , Text = federation.Name  });
+            }
+            return items;
         }
 
         public async Task<bool> SaveChangesAsync()

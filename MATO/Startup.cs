@@ -70,7 +70,7 @@ namespace MATO
                 );
             });
 
-            //seeder.EnsureSeedData().Wait();
+            seeder.EnsureSeedData().Wait();
         }
     }
 }
